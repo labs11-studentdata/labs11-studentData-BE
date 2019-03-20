@@ -1,0 +1,23 @@
+{
+  "name": "labs11-studentdata-be",
+  "version": "1.0.0",
+  "description": "Express app for Labs11 studentdata",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labs11-studentdata/labs11-studentData-BE.git"
+  },
+  "author": "Lambda School Labs 11 studentdata team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/labs11-studentdata/labs11-studentData-BE/issues"
+  },
+  "homepage": "https://github.com/labs11-studentdata/labs11-studentData-BE#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
