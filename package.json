@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/labs11-studentdata/labs11-studentData-BE#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "knex": "^0.16.3",
+    "mysql": "^2.16.0"
   }
 }
