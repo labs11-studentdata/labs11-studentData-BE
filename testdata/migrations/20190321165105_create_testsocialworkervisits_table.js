@@ -14,9 +14,9 @@ exports.up = function(knex, Promise) {
             .inTable('schools');
 
         social_worker_visits
-            .integer('socialworkerID')
+            .integer('socialWorkerID')
             .notNullable()
-            .references('socialworkerID')
+            .references('socialWorkerID')
             .inTable('social_workers');
 
         social_worker_visits.date('visit_date').notNullable();
