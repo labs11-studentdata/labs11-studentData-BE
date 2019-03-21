@@ -8,9 +8,9 @@ module.exports = {
 
         connection: {
             host : 'localhost:3306',
-            user: 'root',
-            password: 'testdb1',
-            database: 'testDB',
+            user: '',
+            password: '',
+            database: '',
         },
 
         useNullAsDefault: true,
@@ -23,4 +23,5 @@ module.exports = {
 
 };
 
-
+//must run as root user
+// sudo docker run -it -p 3306:3306 -p 33060:33060 -e MYSQL_ROOT_PASSWORD= mysql
