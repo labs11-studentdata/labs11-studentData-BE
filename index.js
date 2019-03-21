@@ -1,9 +1,6 @@
-const express = require("express");
-const app = express();
+const { server } = require("./server");
+
+// const express = require("express");
 const PORT = process.env.PORT || 9000;
 
-app.get("/", (req, res) => {
-  res.status(200).send("Hello, World!\nLabs 11 studentdata");
-});
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
