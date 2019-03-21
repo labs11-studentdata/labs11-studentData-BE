@@ -4,13 +4,10 @@ module.exports = {
 
     development: {
 
-        client: 'mysql',
+        client: 'sqlite3',
 
         connection: {
-            host : 'localhost:3306',
-            user: '',
-            password: '',
-            database: '',
+            filename: './testdata/testDB.sqlite3'
         },
 
         useNullAsDefault: true,
