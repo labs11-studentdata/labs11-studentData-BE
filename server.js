@@ -1,7 +1,7 @@
 const express = require("express");
 
 // add cors
-// const cors = require("cors");
+const cors = require("cors");
 
 const configureRoutes = require("./config/routes");
 
