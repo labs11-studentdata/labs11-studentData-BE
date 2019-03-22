@@ -10,12 +10,8 @@ exports.up = function(knex, Promise) {
         school_admins.integer('phone_number');
         school_admins.string('email', 128).notNullable();
 
+        school_admins.integer('schoolID').notNullable()
 
-        school_admins
-            .integer('schoolID')
-            .notNullable()
-            .references('schoolID')
-            .inTable('schools');
     });
 
 };
