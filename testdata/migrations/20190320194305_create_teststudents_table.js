@@ -6,21 +6,13 @@ exports.up = function(knex, Promise) {
         students.increments();
         students.integer('student_id').notNullable();
 
-        students
-            .integer('gradeID')
-            .notNullable()
-            .references('gradeID')
-            .inTable('grades');
+        students.integer('gradeID').notNullable()
 
         students.string('first_name', 128).notNullable();
         students.string('last_name', 128).notNullable();
         students.integer('age').notNullable();
 
-        students
-            .integer('schoolID')
-            .notNullable()
-            .references('schoolID')
-            .inTable('schools');
+        students.integer('schoolID').notNullable()
 
         students.string('photo_url', 128);
         students.string('enrollment_status').defaultTo('current');

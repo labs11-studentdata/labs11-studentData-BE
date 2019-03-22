@@ -7,20 +7,11 @@ exports.up = function(knex, Promise) {
 
         social_worker_visits.integer('visitID').notNullable();
         
-        social_worker_visits
-            .integer('schoolID')
-            .notNullable()
-            .references('schoolID')
-            .inTable('schools');
+        social_worker_visits.integer('schoolID').notNullable()
 
-        social_worker_visits
-            .integer('socialWorkerID')
-            .notNullable()
-            .references('socialWorkerID')
-            .inTable('social_workers');
+        social_worker_visits.integer('socialWorkerID').notNullable()
 
         social_worker_visits.date('visit_date').notNullable();
-
 
         social_worker_visits.string('notes', 1000);
 
