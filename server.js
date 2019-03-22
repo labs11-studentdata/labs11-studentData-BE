@@ -9,7 +9,7 @@ const server = express();
 server.use(express.json());
 
 // uncomment after adding cors
-// server.use(cors());
+server.use(cors());
 
 configureRoutes(server);
 
