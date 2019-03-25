@@ -78,3 +78,18 @@ server.delete('/api/students/:id', (req, res) => {
             res.status(500).json({ message: 'Unable to delete student'});
         })
 })
+
+//get list of all students for a certain grade level at a certain school
+server.get('/api/school/:schoolID/students/:gradeID', (req, res) => {
+    const { schoolID, gradeID } = req.params;
+
+    db.select().from('students')
+        .where({schoolID: schoolID}).andWhere({gradeID: gradeID})
+            .then(students => {
+                res.status(200).json(students);
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Error getting list of students.' })
+            })
+
+})
