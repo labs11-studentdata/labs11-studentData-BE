@@ -56,6 +56,21 @@ server.get('/:id', (req, res) => {
     })
 });
 
+//get list of all students for a certain grade level at a certain school
+server.get('/api/school/:schoolID/students/:gradeID', (req, res) => {
+    const { schoolID, gradeID } = req.params;
+
+    db.select().from('students')
+        .where({schoolID: schoolID}).andWhere({gradeID: gradeID})
+            .then(students => {
+                res.status(200).json(students);
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Error getting list of students.' })
+            })
+
+})
+
 //delete a student
 server.delete('/:id', (req, res) => {
     const { id } = req.params;
