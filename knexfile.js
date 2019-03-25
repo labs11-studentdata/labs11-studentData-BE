@@ -4,22 +4,19 @@ module.exports = {
 
     development: {
 
-        client: 'mysql',
+        client: 'sqlite3',
 
         connection: {
-            host: '',
-            port: '',
-            user: '',
-            password: '',
-            database: ''        },
+            filename: './data/studentData.db3'
+        },
 
         useNullAsDefault: true,
 
         migrations: {
-            directory: './testdata/migrations'
+            directory: './data/migrations'
         },
         seeds: {
-            directory: './testdata/productionSeeds'
+            directory: './data/productionSeeds'
         },
 
     },
