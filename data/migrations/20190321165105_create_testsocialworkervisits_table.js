@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
         
         social_worker_visits.integer('schoolID').notNullable()
 
-        social_worker_visits.integer('socialWorkerID').notNullable()
+        social_worker_visits.integer('user_id').notNullable()
 
         social_worker_visits.date('visit_date').notNullable();
 

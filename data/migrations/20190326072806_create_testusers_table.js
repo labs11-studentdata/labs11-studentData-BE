@@ -1,12 +1,16 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('users', (tbl) => {
-      tbl.increments('user_id');
-      tbl.string('auth_id');
-      tbl.string('firstname');
-      tbl.string('lastname');
-      tbl.string('email');
-      tbl.timestamps(true, true);
+  return knex.schema.createTable('users', function(users) {
+      users.increments();
+      users.integer('user_ID');
+      users.string('auth_id');
+      users.string('first_name');
+      users.string('last_name');
+      users.string('email');
+      users.string('photo_url', 128);
+      users.string('account_type');
+      users.integer('user_permissions');
+      users.timestamps(true, true);
   })
 };
 
