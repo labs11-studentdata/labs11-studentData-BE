@@ -89,4 +89,18 @@ server.delete('/:id', (req, res) => {
         })
 })
 
+//update a visit
+server.put('/', (req, res) => {
+
+    const visit = req.body;
+ 
+    db('social_worker_visits').update(visit).where({visitID: visit.visitID})
+     .then(updated => {
+       res.status(201).json(updated)
+     })
+     .catch(err => {
+       res.status(500).json({message: 'Unable to update visit'});
+     })
+ })
+
 module.exports = server;
