@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const server = express();
 const studentRoutes = require('../config/students/studetsRoutes');
+const social_worker_visits = require('../config/socialWorkerVisits/socialWorkerVisitRoutes');
 const authRoutes = require('../config/auth/authRoutes');
 const passportSetup = require('../config/auth/passportSetup');
 const cookieSession = require('cookie-session');
@@ -23,6 +24,7 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/students', studentRoutes);
+server.use('/api/social_worker_visits', socialWorkerVisitRoutes);
 server.use('/auth', authRoutes)
 
 module.exports = {
