@@ -54,7 +54,7 @@ server.get('/:id', (req, res) => {
 });
 
 //get list of all students for a certain school
-server.get('school/:schoolID/students/', (req, res) => {
+server.get('/school/:schoolID/students/', (req, res) => {
     const { schoolID } = req.params;
 
     db.select().from('students')
@@ -69,7 +69,7 @@ server.get('school/:schoolID/students/', (req, res) => {
 })
 
 //get list of all students for a certain grade level at a certain school
-server.get('school/:schoolID/students/:gradeID', (req, res) => {
+server.get('/school/:schoolID/students/:gradeID', (req, res) => {
     const { schoolID, gradeID } = req.params;
 
     db.select().from('students')
@@ -81,6 +81,25 @@ server.get('school/:schoolID/students/:gradeID', (req, res) => {
                 res.status(500).json({ message: 'Error getting list of students.' })
             })
 
+})
+
+//update a student
+server.put('/:id', (req, res)=>{
+    const changes = req.body;
+    const { id } = req.params;
+    db('students')
+        .where({ id })
+        .update(changes)
+        .then(ids => {
+            const id = ids[0];
+            db('students')
+                .where({id})
+                .then(student => {
+                    res.status(201).json(student);
+                })
+                .catch(err => res.status(500).json({error: err, message: err.message}))
+        })
+        .catch(err => res.status(500).json({error: err, message: err.message}))
 })
 
 //delete a student
