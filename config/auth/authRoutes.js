@@ -2,13 +2,15 @@ const express = require('express');
 const router = express();
 const passport = require('passport');
 
-// AUTHENTICAITON w/ GOOGLE 
+// authentication with google
 router.get('/google', passport.authenticate('google', {
     scope: ['profile']
 }));
 
-// CALLBACK ROUTE FOR GOOGLE REDIRECT
+// callback for google redirect 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    
+    console.log(req.user)
+    res.send('hi from your callback ui')
 })
+
 module.exports = router;
