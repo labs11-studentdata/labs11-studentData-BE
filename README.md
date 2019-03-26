@@ -2,6 +2,8 @@
 
 ### Environment
 
+Create a file called `.env` in your root directory and populate it with the keys below.
+
 Contact `brackkevin@gmail.com` for database access
 
 Sign up for a set of Google credentials at http://console.developers.google.com
