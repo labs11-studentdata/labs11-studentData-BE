@@ -3,7 +3,7 @@ const cors = require("cors");
 const server = express();
 const studentRoutes = require('../config/students/studetsRoutes');
 const authRoutes = require('../config/auth/authRoutes');
-
+const passportSetup = require('../config/auth/passport-setup');
 server.use(express.json());
 server.use(cors());
 
