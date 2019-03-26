@@ -83,6 +83,25 @@ server.get('school/:schoolID/students/:gradeID', (req, res) => {
 
 })
 
+//update a student
+server.put('/:id', (req, res)=>{
+    const changes = req.body;
+    const { id } = req.params;
+    db('students')
+        .where({ id })
+        .update(changes)
+        .then(ids => {
+            const id = ids[0];
+            db('students')
+                .where({id})
+                .then(student => {
+                    res.status(201).json(student);
+                })
+                .catch(err => res.status(500).json({error: err, message: err.message}))
+        })
+        .catch(err => res.status(500).json({error: err, message: err.message}))
+})
+
 //delete a student
 server.delete('/:id', (req, res) => {
     const { id } = req.params;
