@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const server = express();
 const studentRoutes = require('../config/students/studetsRoutes');
+const social_worker_visits = require('../config/socialWorkerVisits/socialWorkerVisitRoutes');
 const authRoutes = require('../config/auth/authRoutes');
 const schoolRoutes = require('../config/schools/schoolRoutes');
 const passportSetup = require('../config/auth/passportSetup');
@@ -24,7 +25,8 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/students', studentRoutes);
-server.use('/auth', authRoutes);
+server.use('/api/social_worker_visits', socialWorkerVisitRoutes);
+server.use('/auth', authRoutes)
 server.use('/api/schools', schoolRoutes);
 
 module.exports = {
