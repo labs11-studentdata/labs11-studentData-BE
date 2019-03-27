@@ -3,7 +3,7 @@ const GoogleStrategy = require("passport-google-oauth20");
 const users = require("./usersModel");
 
 passport.serializeUser((user, done) => {
-  done(null, user.user_id);
+  done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -34,7 +34,6 @@ passport.use(
         };
         const newUser = await users.addUser(user);
         done(null, newUser);
-        console.log(newUser);
       }
     }
   )
