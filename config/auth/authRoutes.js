@@ -15,7 +15,7 @@ router.get('/google/redirect', passport.authenticate('google'),  (req, res) => {
     const query = querystring.stringify({
         "token": token
     })
-    res.redirect('http://localhost:3000/' + query)
+    res.redirect(process.env.REACT_ROOT + '/' + query);
     console.log(token)
 })
 
