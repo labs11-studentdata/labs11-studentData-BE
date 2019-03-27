@@ -4,13 +4,8 @@ const server = express();
 const studentRoutes = require('../config/students/studetsRoutes');
 const authRoutes = require('../config/auth/authRoutes');
 const passportSetup = require('../config/auth/passportSetup');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-server.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: [process.env.SESSION_KEY] 
-}))
 
 // initialize passport 
 server.use(passport.initialize());

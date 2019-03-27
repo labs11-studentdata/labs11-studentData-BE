@@ -34,7 +34,6 @@ passport.use(
         };
         const newUser = await users.addUser(user);
         done(null, newUser);
-        console.log(newUser);
       }
     }
   )
