@@ -4,11 +4,8 @@ const server = express();
     added some basic endpoints for the students table for testing purposes, 
     when we start adding the endpoints for the rest of the tables we can reorganize these all into separate files
 */
-const knex = require('knex');
 
-const knexConfig = require('../../knexfile');
-
-const db = knex(knexConfig.development);
+const db = require('../../data/dbConfig');
 
 //add a new student
 server.post('/', (req, res) => {
@@ -56,8 +53,23 @@ server.get('/:id', (req, res) => {
     })
 });
 
+//get list of all students for a certain school
+server.get('/school/:schoolID/students/', (req, res) => {
+    const { schoolID } = req.params;
+
+    db.select().from('students')
+        .where({schoolID})
+            .then(students => {
+                res.status(200).json(students);
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Error getting list of students.' })
+            })
+
+})
+
 //get list of all students for a certain grade level at a certain school
-server.get('/api/school/:schoolID/students/:gradeID', (req, res) => {
+server.get('/school/:schoolID/students/:gradeID', (req, res) => {
     const { schoolID, gradeID } = req.params;
 
     db.select().from('students')
@@ -69,6 +81,25 @@ server.get('/api/school/:schoolID/students/:gradeID', (req, res) => {
                 res.status(500).json({ message: 'Error getting list of students.' })
             })
 
+})
+
+//update a student
+server.put('/:id', (req, res)=>{
+    const changes = req.body;
+    const { id } = req.params;
+    db('students')
+        .where({ id })
+        .update(changes)
+        .then(ids => {
+            const id = ids[0];
+            db('students')
+                .where({id})
+                .then(student => {
+                    res.status(201).json(student);
+                })
+                .catch(err => res.status(500).json({error: err, message: err.message}))
+        })
+        .catch(err => res.status(500).json({error: err, message: err.message}))
 })
 
 //delete a student
