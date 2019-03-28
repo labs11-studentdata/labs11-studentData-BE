@@ -37,3 +37,5 @@ server.get('/user/:id', (req, res) => {
         res.status(500).json({ error: "Couldn't get the requested donations; please try again." });
     })
 });
+
+module.exports = server
