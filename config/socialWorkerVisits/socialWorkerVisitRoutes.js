@@ -40,7 +40,6 @@ server.get('/', (req, res) => {
 server.get('/:id', (req, res) => {
   
     const { id } = req.params;
-    const { visit }= req.body;
   
     db('social_worker_visits')
     .where({visit_id: id})
@@ -58,7 +57,7 @@ server.get('/:id', (req, res) => {
 
 //get list of all visits for a certain school
 server.get('/school/:id', (req, res) => {
-    const { schoolID } = req.params;
+    const { id } = req.params;
 
     db.select().from('social_worker_visits')
         .where({schoolID: schoolID})
