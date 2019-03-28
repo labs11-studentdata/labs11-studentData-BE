@@ -15,7 +15,7 @@ passport.use(
   new GoogleStrategy(
     {
       // options for strategy
-      callbackURL: "/auth/google/redirect",
+      callbackURL: process.env.GOOGLE_REDIRECT,
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
@@ -24,7 +24,8 @@ passport.use(
     //   check if user is currently in db
       if (currentUser) {
         console.log("user in system");
-        done(null, currentUser);
+        console.log(currentUser)
+        done(null, currentUser, { message: 'user in system' });
       } else {
         //   create new user if user is not in db
         const user = {
@@ -33,7 +34,7 @@ passport.use(
           last_name: profile.name.familyName
         };
         const newUser = await users.addUser(user);
-        done(null, newUser);
+        done(null, newUser), { message: 'new user' };
       }
     }
   )

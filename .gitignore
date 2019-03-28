@@ -3,5 +3,6 @@ node_modules
 *.env
 package-lock.json
 dbnotes.txt
+yarn.lock
 
 /testdata/testDB.sqlite3

@@ -37,13 +37,16 @@ Sign up for a set of Google credentials at http://console.developers.google.com
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 SESSION_KEY=
+JWT_SECRECT=
 
-DB_ENV=production or development
+DB_ENV=development or production
 
-MYSQL_HOST=sdstaging3.ctuitjdn8sof.us-east-2.rds.amazonaws.com
+MYSQL_HOST=sdstaging7.ctuitjdn8sof.us-east-2.rds.amazonaws.com
 MYSQL_USER=
 MYSQL_PASS=
 MYSQL_DB=studentdata
+
+REACT_ROOT=http://localhost:3000
 ```
 
 -----
