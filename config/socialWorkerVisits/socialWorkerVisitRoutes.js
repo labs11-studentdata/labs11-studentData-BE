@@ -57,7 +57,7 @@ server.get('/:id', (req, res) => {
 });
 
 //get list of all visits for a certain school
-server.get('/school/:id/social_worker_visits', (req, res) => {
+server.get('/school/:id', (req, res) => {
     const { schoolID } = req.params;
 
     db.select().from('social_worker_visits')
@@ -90,7 +90,7 @@ server.delete('/:id', (req, res) => {
 })
 
 //update a visit
-server.put('/', (req, res) => {
+server.put('/:id', (req, res) => {
 
     const visit = req.body;
  
