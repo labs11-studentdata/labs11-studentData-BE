@@ -15,6 +15,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use(express.json());
 server.use(cors());
+server.use(express.static('public'))
 
 server.get('/', (req, res) => {
   res.status(200).send("Hello, World!\nLabs 11 studentdata");
