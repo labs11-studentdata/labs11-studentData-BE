@@ -20,12 +20,12 @@ server.get('/', (req, res) => {
 });
 
 //view all donations by one member
-server.get('/board_member/:id', (req, res) => {
+server.get('/user/:id', (req, res) => {
 
     const { id } = req.params;
 
     db('donations')
-    .where({board_member_id: id})
+    .where({user_ID: id})
     .then(donation => {
         if (donation) {
             res.status(200).json(donation);
