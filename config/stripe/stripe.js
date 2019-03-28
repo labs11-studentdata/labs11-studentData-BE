@@ -21,3 +21,5 @@ server.post('/charge', async (req, res) => {
     res.status(500).end();
   }
 });
+
+module.exports = server;
