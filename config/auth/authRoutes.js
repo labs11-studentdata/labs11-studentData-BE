@@ -14,6 +14,7 @@ router.get(
 // callback for google redirect
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   const token = jwt.generateToken(req.user);
+  console.log(token)
   const user = req.user;
   const query = querystring.stringify({token: token});
   const createdAt = user.created_at;
@@ -25,7 +26,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
     console.log(token);
   } else {
     // RETURNING USER -- check find user type and send back to client
-    console.log('old bitch')
+    res.redirect(process.env.REACT_ROOT + "/" + query);
 
   }
   
