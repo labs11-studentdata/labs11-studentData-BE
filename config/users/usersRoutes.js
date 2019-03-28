@@ -20,10 +20,10 @@ router.put('/:user_id', async (req, res) => {
     console.log(updates)
     try{
         const updatedUser = await users.updateUser(user_id, updates)
-        console.log(updatedUser)
+        res.status(200).json({message: "User updated", updatedUser})
     }
     catch(error){
-        console.log(error)
+        res.status(500).json({message: 'We are momentarily having issues!'});
     }
 })
 

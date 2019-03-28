@@ -24,10 +24,12 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   if (Math.floor((new Date() - new Date(isoString)) / 60000) < 2) {
     // NEW USER -- redirect to onboarding page
     res.redirect(process.env.REACT_ROOT + "/onboarding" + query);
+    console.log('blell')
     console.log(token);
   } else {
     // RETURNING USER -- check find user type and send back to client
-    res.redirect(process.env.REACT_ROOT + "/" + query);
+    res.redirect(process.env.REACT_ROOT + "/board/" + query);
+    console.log('ffffff')
 
   }
   
