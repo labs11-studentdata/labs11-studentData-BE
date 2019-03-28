@@ -6,6 +6,7 @@ const socialWorkerVisitRoutes = require('../config/socialWorkerVisits/socialWork
 const authRoutes = require('../config/auth/authRoutes');
 const schoolRoutes = require('../config/schools/schoolRoutes');
 const passportSetup = require('../config/auth/passportSetup');
+const userRoutes = require('../config/users/usersRoutes');
 const passport = require('passport');
 
 
@@ -23,6 +24,7 @@ server.use('/api/students', studentRoutes);
 server.use('/api/social_worker_visits', socialWorkerVisitRoutes);
 server.use('/auth', authRoutes)
 server.use('/api/schools', schoolRoutes);
+server.use('/api/users', userRoutes);
 
 module.exports = {
   server
