@@ -29,8 +29,8 @@ passport.use(
         //   create new user if user is not in db
         const user = {
           auth_id: profile.id,
-          firstname: profile.name.givenName,
-          lastname: profile.name.familyName
+          first_name: profile.name.givenName,
+          last_name: profile.name.familyName
         };
         const newUser = await users.addUser(user);
         done(null, newUser);
