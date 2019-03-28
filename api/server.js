@@ -8,7 +8,8 @@ const schoolRoutes = require('../config/schools/schoolRoutes');
 const passportSetup = require('../config/auth/passportSetup');
 const userRoutes = require('../config/users/usersRoutes');
 const passport = require('passport');
-const donationRoutes = require('../config/donations/donationRoutes')
+const stripe = require('../config/stripe/stripe');
+const donationRoutes = require('../config/donations/donationRoutes');
 
 
 // initialize passport 
@@ -26,6 +27,7 @@ server.use('/api/students', studentRoutes);
 server.use('/api/social_worker_visits', socialWorkerVisitRoutes);
 server.use('/auth', authRoutes)
 server.use('/api/schools', schoolRoutes);
+server.use('/api/stripe', stripe);
 server.use('/api/users', userRoutes);
 server.use('/api/donations', donationRoutes);
 
