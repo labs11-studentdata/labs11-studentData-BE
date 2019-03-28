@@ -7,6 +7,7 @@ const authRoutes = require('../config/auth/authRoutes');
 const schoolRoutes = require('../config/schools/schoolRoutes');
 const passportSetup = require('../config/auth/passportSetup');
 const passport = require('passport');
+const stripe = require('../config/stripe/stripe');
 
 
 // initialize passport 
@@ -23,6 +24,7 @@ server.use('/api/students', studentRoutes);
 server.use('/api/social_worker_visits', socialWorkerVisitRoutes);
 server.use('/auth', authRoutes)
 server.use('/api/schools', schoolRoutes);
+server.use('/api/stripe', stripe);
 
 module.exports = {
   server

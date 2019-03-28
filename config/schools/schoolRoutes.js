@@ -86,8 +86,4 @@ server.delete('/:id', (req, res) => {
       })
 })
 
-<<<<<<< HEAD
 module.exports = server;
-=======
-module.exports = server;
->>>>>>> master
