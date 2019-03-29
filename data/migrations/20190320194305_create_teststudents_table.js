@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTable('students', function(students) {
 
         students.increments();
-        students.integer('student_id').notNullable();
+        students.integer('student_id').increments().notNullable();
 
         students.integer('gradeID').notNullable()
 

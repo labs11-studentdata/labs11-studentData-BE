@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
 
         social_worker_visits.increments();
 
-        social_worker_visits.integer('visitID').notNullable();
+        social_worker_visits.integer('visitID').increments().notNullable();
         
         social_worker_visits.integer('schoolID').notNullable()
 
