@@ -18,7 +18,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   console.log(token)
   const user = req.user;
   console.log("here:", user.id)
-  const query = querystring.stringify({token: token, user: user.id, user2: user.user_permissions});
+  const query = querystring.stringify({token: token, user_id: user.id, user_permissions: user.user_permissions});
   const created_at = user["created_at"]
   // const date = Date(createdAt)
   if(user.user_permissions === null) {
