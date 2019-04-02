@@ -23,19 +23,6 @@ server.post('/', (req, res) => {
         })
 });
 
-//get all visits for user
-server.get('/', (req, res) => {
-
-    db.select().from('social_worker_visits')
-        .then(visits => {
-            res.status(200).json(visits);
-        })
-        .catch(err => {
-            res.status(500).json({ error: "Couldn't get list of visits."})
-        })
-
-});
-
 //get a visit by ID
 server.get('/:id', (req, res) => {
   
@@ -60,7 +47,22 @@ server.get('/school/:id', (req, res) => {
     const { id } = req.params;
 
     db.select().from('social_worker_visits')
-        .where({schoolID: schoolID})
+        .where({schoolID: id})
+            .then(visits => {
+                res.status(200).json(visits);
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Error getting list of visits.' })
+            })
+
+})
+
+//get list of all visits for a certain user
+server.get('/user/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.select().from('social_worker_visits')
+        .where({user_id: id})
             .then(visits => {
                 res.status(200).json(visits);
             })

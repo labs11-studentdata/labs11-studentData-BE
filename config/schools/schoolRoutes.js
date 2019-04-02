@@ -44,13 +44,15 @@ server.get('/:id', (req, res) => {
 server.post('/', (req, res) => {
   
   const school = req.body;
-
-  db.insert(school).into('schools')
+  console.log(school)
+  db('schools').insert(school)
     .then(id => {
       res.status(201).json(id)
+      console.log(id)
     })
     .catch(err => {
       res.status(500).json(err);
+      console.log(err)
     })
 });
 
