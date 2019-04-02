@@ -34,6 +34,7 @@ passport.use(
           last_name: profile.name.familyName
         };
         const newUser = await users.addUser(user);
+        console.log(newUser)
         done(null, newUser), { message: 'new user' };
       }
     }
