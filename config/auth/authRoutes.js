@@ -24,8 +24,9 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   // const date = Date(createdAt)
   if(user.user_permissions === null) {
     res.redirect(`${process.env.REACT_ROOT}/onboarding/${query}`);
+    console.log('blejj')
   } else {
-    
+    console.log("returning")
     res.redirect(`${process.env.REACT_ROOT}/${query}`)
   }
   // if (Math.floor((new Date() - new Date(isoString)) / 60000) < 2) {

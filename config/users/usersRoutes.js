@@ -15,11 +15,12 @@ router.get('/:user_id', async (req, res) => {
 })
 
 router.put('/:user_id', async (req, res) => {
-    const user_id = req.params.user_id;
+    const user_id = parseInt(req.params.user_id);
     const updates = req.body;
-    console.log(updates)
+    console.log(typeof(user_id))
     try{
         const updatedUser = await users.updateUser(user_id, updates)
+        console.log(updatedUser)
         res.status(200).json({message: "User updated", updatedUser})
     }
     catch(error){
