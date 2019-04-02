@@ -13,6 +13,3 @@ function findAuthId(authId) {
 function findUser(id) {
     return db('users').where({user_id: id}).first()
 }
-function findSchoolStudents(user_id, school_id) {
-    
-}
