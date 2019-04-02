@@ -4,7 +4,7 @@ exports.seed = function(knex, Promise) {
     return knex('users').del()
       .then(function () {
         // Inserts seed entries
-        return knex('users').insert([{"user_ID":1,"first_name":"Ingar","last_name":"Mohan","email":"imohan0@prnewswire.com","user_permissions":28},
+        return knex('users').insert([{"user_ID":1,"first_name":"Ingar","last_name":"Mohan","email":"imohan0@prnewswire.com","user_permissions":28, "schoolID": 2},
         {"user_ID":2,"first_name":"Ferne","last_name":"Ferentz","email":"fferentz1@marketwatch.com","user_permissions":6},
         {"user_ID":3,"first_name":"Zelig","last_name":"Hasted","email":"zhasted2@geocities.jp","user_permissions":25},
         {"user_ID":4,"first_name":"Ariel","last_name":"Dongall","email":"adongall3@twitter.com","user_permissions":23},
