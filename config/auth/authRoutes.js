@@ -17,10 +17,10 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   const token = jwt.generateToken(req.user);
   const user = req.user;
   console.log(user)
-  const query = querystring.stringify({token: token, user_id: user.id, user_permissions: user.user_permissions });
+  const query = querystring.stringify({token: token, user_id: user.id, account_type: user.account_type, schoolID: user.schoolID });
   const created_at = user["created_at"]
   // const date = Date(createdAt)
-  if(user.user_permissions === null) {
+  if(user.account_type === null) {
     res.redirect(`${process.env.REACT_ROOT}/onboarding/${query}`);
     console.log('blejj')
   } else {

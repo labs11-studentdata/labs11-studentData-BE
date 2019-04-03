@@ -48,16 +48,13 @@ server.get('/:id', (req, res) => {
 server.get('/school/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const visits = await db.select().from('social_worker_visits')
-        .where({schoolID: id})
-        const userIDs = visits.map(visit => visit.user_id)
-        const usersInfo =  userIDs.map(  user => {
-            await db('users').where({id: user})
-        })
-        console.log(usersInfo)
-        const school = await db('schools').where({schoolID: id}).first()
-        const schoolVisits = {visits: visits, school: school}
-        res.status(200).json({schoolVisits})
+        const schoolVisits = await db.select(
+            'v.notes',
+            'v.visit_date',
+            'u.first_name',
+            'u.last_name'
+        ).from('social_worker_visits AS v').innerJoin('users AS u', 'u.id', 'v.user_id').where('v.schoolID', '=', id)
+        res.status(200).json({schoolVisits: schoolVisits})
     }
     catch(error) {
         res.status(500).json({message: 'Internal Error. Please try again!'})
