@@ -1,16 +1,23 @@
 const express = require('express');
 const server = express();
-const key = process.env.STRIPE_SECRET_KEY;
+const key = process.env.SECRET_STRIPE_KEY;
 const stripe = require('stripe')(key);
 
-server.post('/charge', async (req, res) => {
+const charge = (token, amount) => {
+  return stripe.charges.create({
+    amount: amount * 100,
+    currency: 'usd',
+    source: token,
+    description: 'Donation'
+  })
+}
+
+server.post('/', async (req, res) => {
+  console.log(req.body);
+  console.log(req.body.token.id);
   try {
-    let {status} = await stripe.charges.create({
-      amount: 2000,
-      currency: "usd",
-      source: req.body
-    });
-    res.json({status});
+    let {status} = await charge(req.body.token.id, req.body.amount);
+    res.json({message: status});
   } catch (err) {
     res.status(500).end();
   }
