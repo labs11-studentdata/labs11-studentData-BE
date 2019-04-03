@@ -3,9 +3,14 @@ const db = require('../../data/dbConfig');
 module.exports = {
     getUser,
     updateUser,
-    findSchoolStudents
+    findSchoolStudents,
+    getUsers
 }
 
+async function getUsers() {
+    const users = await db('users');
+    return users
+}
 async function getUser(id){
     const user = await db('users').where({id}).first();
     return user
