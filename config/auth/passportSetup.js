@@ -23,8 +23,6 @@ passport.use(
       const currentUser = await users.findAuthId(profile.id);
     //   check if user is currently in db
       if (currentUser) {
-        console.log("user in system");
-        console.log(currentUser)
         done(null, currentUser, { message: 'user in system' });
       } else {
         //   create new user if user is not in db
