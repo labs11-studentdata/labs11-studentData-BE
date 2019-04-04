@@ -38,4 +38,14 @@ server.get('/user/:id', (req, res) => {
     })
 });
 
+server.post('/', (req, res) => {
+    db('donations').insert(req.body)
+        .then(donation => {
+            res.status(201).json(donation)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        });
+})
+
 module.exports = server
