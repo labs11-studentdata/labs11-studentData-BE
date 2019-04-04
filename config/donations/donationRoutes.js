@@ -48,4 +48,29 @@ server.post('/', (req, res) => {
         });
 })
 
+// get donations for a specific school 
+
+server.get('/school/:id', async (req, res) => {
+    const id = req.params.id
+    try{
+        
+        const schoolDonations = await db.select(
+            'u.first_name as donor_first',
+            'u.last_name as donor_last',
+            's.first_name as student_first',
+            's.last_name as student_last',
+            's.dues',
+            'd.donation_total',
+            'd.donation_date',
+            'd.schoolID'
+            ).from('donations AS d').innerJoin('users AS u', "u.user_ID", "d.user_ID").innerJoin('students AS s', 's.student_id', 's.student_id').where('d.schoolID', '=', id)
+        const users = await db('users') 
+        const students = await db('students')
+            console.log(schoolDonations)
+        res.status(200).json({schoolDonations})
+    }
+    catch(error){
+        console.log(error)
+    }
+})
 module.exports = server
