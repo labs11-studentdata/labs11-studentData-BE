@@ -42,20 +42,28 @@ server.get('/:id', (req, res) => {
     })
 });
 
-//get list of all visits for a certain school
-server.get('/school/:id', (req, res) => {
-    const { id } = req.params;
 
-    db.select().from('social_worker_visits')
-        .where({schoolID: id})
-            .then(visits => {
-                res.status(200).json(visits);
-            })
-            .catch(err => {
-                res.status(500).json({ message: 'Error getting list of visits.' })
-            })
+//get list of all visits for a certain school
+
+server.get('/school/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const schoolVisits = await db.select(
+            'v.notes',
+            'v.visit_date',
+            'u.first_name',
+            'u.last_name'
+        ).from('social_worker_visits AS v').innerJoin('users AS u', 'u.id', 'v.user_id').where('v.schoolID', '=', id)
+        res.status(200).json({schoolVisits: schoolVisits})
+    }
+    catch(error) {
+        res.status(500).json({message: 'Internal Error. Please try again!'})
+    }
+    
 
 })
+
+
 
 //get list of all visits for a certain user
 server.get('/user/:id', (req, res) => {
@@ -97,11 +105,23 @@ server.put('/:id', (req, res) => {
  
     db('social_worker_visits').update(visit).where({visitID: visit.visitID})
      .then(updated => {
-       res.status(201).json(updated)
+       res.status(201).json(updated);
      })
      .catch(err => {
        res.status(500).json({message: 'Unable to update visit'});
      })
  })
 
+//  get the social worker visits for a particular admin 
+ server.get('/:user_id', async (req, res) => {
+    const user_id = req.params.user_id; 
+    try{
+        const schoolID = await db('users').select('schoolID').where().first();
+        console.log(schoolID)
+        
+    }
+     catch(error) {
+         res.status(500).json({message: "Internal error, cannot get social worker visits for this admin"});
+     }
+ })
 module.exports = server;
