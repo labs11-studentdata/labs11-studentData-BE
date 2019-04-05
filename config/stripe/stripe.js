@@ -13,8 +13,6 @@ const charge = (token, amount) => {
 }
 
 server.post('/', async (req, res) => {
-  console.log(req.body);
-  console.log(req.body.token.id);
   try {
     let {status} = await charge(req.body.token.id, req.body.amount);
     res.json({message: status});
