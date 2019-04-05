@@ -1,11 +1,12 @@
 const express = require('express');
+const multer = require('multer');
+
 const server = express();
 
-const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, './uploads');
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname);
@@ -28,23 +29,25 @@ const fileFilter = (req, file, cb) => {
  *  which should then be stored in the photo_url field of the student in the database (might need to rewrite this to be asynchronous)
  */
 
-server.post("/", (req, res) => {
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter 
+})
 
-    const upload = multer({
-        storage: storage,
-        limits: {
-            fileSize: 1024 * 1024 * 5
-        },
-        fileFilter: fileFilter 
-    });
+server.post("/", upload.single('userImage'), (req, res, next) => {
 
-    upload.single('studentPhoto')
-        .then(upload => { 
-            res.status(201).json(req.file.path);
+    if(!req.file) {
+        console.log("did not receive image file");
+        return res.send({
+            success: false
         })
-        .catch(e => {
-            res.status(500).json(e);
-        })
+    } else {
+        console.log("received file", req.file.path);
+        res.status(200).json(req.file.path);
+    }
 
 });
 

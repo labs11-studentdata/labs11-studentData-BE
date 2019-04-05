@@ -10,6 +10,7 @@ const userRoutes = require('../config/users/usersRoutes');
 const passport = require('passport');
 const stripe = require('../config/stripe/stripe');
 const donationRoutes = require('../config/donations/donationRoutes');
+const multer = require('multer');
 const imageUploads = require('../config/imageUploads/uploadRoutes');
 
 
