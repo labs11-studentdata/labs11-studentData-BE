@@ -3,17 +3,21 @@ exports.up = function(knex, Promise) {
 
     return knex.schema.createTable('students', function(students) {
 
-        students.increments();
-        students.integer('student_id').notNullable();
+        students.increments('studentID');
 
-        students.integer('gradeID').notNullable()
+        students.integer('grade').notNullable()
 
         students.string('first_name', 128).notNullable();
         students.string('last_name', 128).notNullable();
         students.integer('age').notNullable();
 
-        students.integer('schoolID').notNullable()
-
+        students
+            .integer('schoolID')        
+            .unsigned()
+            .notNullable()
+        
+        students.foreign('schoolID').references('schools.schoolID');
+    
         students.string('photo_url', 128);
         students.string('enrollment_status').defaultTo('current');
         students.boolean('has_insurance');
