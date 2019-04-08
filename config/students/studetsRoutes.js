@@ -15,6 +15,7 @@ server.post('/', (req, res) => {
     db.insert(student).into('students')
         .then(id => {
             res.status(201).json(id)
+            console.log(id)
         })
         .catch(err => {
             res.status(500).json(err);
@@ -89,12 +90,14 @@ server.get('/school/:schoolID/students/:gradeID', (req, res) => {
 server.put('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
-  
+    console.log(id)
+  console.log(changes)
     db('students')
     .where({id: id})
     .update(changes)
     .then(student => {
-            return res.status(201).json({ message: 'Student information has been updated.'});
+         res.status(201).json({ message: 'Student information has been updated.'});
+            console.log(student)
     })
     .catch(err => {
         res.json(500).json({ error: "This student's information could not be modified." })
