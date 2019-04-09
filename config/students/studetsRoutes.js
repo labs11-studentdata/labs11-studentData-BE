@@ -90,7 +90,7 @@ server.put('/:id', (req, res) => {
     console.log(id)
   console.log(changes)
     db('students')
-    .where({id: id})
+    .where({studentID: id})
     .update(changes)
     .then(student => {
          res.status(201).json({ message: 'Student information has been updated.'});
@@ -105,7 +105,7 @@ server.put('/:id', (req, res) => {
 server.delete('/:id', (req, res) => {
     const { id } = req.params;
 
-    db('students').where({ id })
+    db('students').where({ studentID: id })
         .del()
         .then(student => {
             if (student) {
