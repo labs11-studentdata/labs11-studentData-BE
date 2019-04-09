@@ -10,16 +10,13 @@ const db = require('../../data/dbConfig');
 //add a new student
 server.post('/', (req, res) => {
     const student = req.body;
-    const newStudent = {}
-    console.log(student)
     db.insert(student).into('students')
         .then(id => {
-            res.status(201).json(id)
-            console.log(id)
+            db('students')
+                .then(students => res.status(201).json({students}))
         })
         .catch(err => {
             res.status(500).json(err);
-            console.log(err)
         })
 });
 
