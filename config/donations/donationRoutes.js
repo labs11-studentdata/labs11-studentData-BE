@@ -25,7 +25,7 @@ server.get('/user/:id', (req, res) => {
     const { id } = req.params;
 
     db('donations')
-    .where({user_ID: id})
+    .where({userID: id})
     .then(donation => {
         if (donation) {
             res.status(200).json(donation);
@@ -63,10 +63,10 @@ server.get('/user/:id', (req, res) => {
         donation[id] = db('donations').select('id').where({id: id}).first();
         donation[donation_amount] = db('donations').select('donation_amount').where({id: id}).first();
         donation[donation_date] = db('donations').select('donation_date').where({id: id}).first();
-        donation[user_first_name] = db('users').select('first_name').where({user_ID: user_id}).first();
-        donation[user_last_name] = db('users').select('last_name').where({user_ID: user_id}).first();
-        donation[student_first_name] = db('students').select('first_name').where({student_id: id}).first();
-        donation[student_last_name] = db('students').select('last_name').where({student_id: id}).first();
+        donation[user_first_name] = db('users').select('first_name').where({userID: userID}).first();
+        donation[user_last_name] = db('users').select('last_name').where({userID: userID}).first();
+        donation[student_first_name] = db('students').select('first_name').where({studentID: id}).first();
+        donation[student_last_name] = db('students').select('last_name').where({studentID: id}).first();
         donation[school_name] = db('schools').select('school_name').where({schoolID: schoolID}).first();
 
     }); 
@@ -115,7 +115,7 @@ server.get('/school/:id', async (req, res) => {
             'd.donation_total',
             'd.donation_date',
             'd.schoolID'
-            ).from('donations AS d').innerJoin('students AS s', 'd.student_id', 's.student_id').innerJoin('users AS u', "d.user_ID", "u.user_ID").where('d.schoolID', '=', id)
+            ).from('donations AS d').innerJoin('students AS s', 'd.studentID', 's.studentID').innerJoin('users AS u', "d.userID", "u.userID").where('d.schoolID', '=', id)
         const users = await db('users') 
         const students = await db('students')
             console.log(schoolDonations)

@@ -40,7 +40,7 @@ server.get('/:id', (req, res) => {
     const { student }= req.body;
   
     db('students')
-    .where({student_id: id})
+    .where({studentID: id})
     .then(student => {
         if (student) {
             res.status(200).json(student);

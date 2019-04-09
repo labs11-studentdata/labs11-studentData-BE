@@ -11,5 +11,5 @@ function findAuthId(authId) {
     return db('users').where({auth_id: authId}).first()
 }
 function findUser(id) {
-    return db('users').where({user_id: id}).first()
+    return db('users').where({userID: id}).first()
 }
