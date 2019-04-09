@@ -34,7 +34,7 @@ router.put('/:userID', async (req, res) => {
     const updates = req.body;
     const newUpdates = {
         ...updates,
-        userID: parseInt(updates.userID)
+        userID: userID
     } 
     console.log(newUpdates)
     console.log('_______________________')
@@ -54,10 +54,10 @@ router.put('/:userID', async (req, res) => {
 })
 
 // GET STUDENTS -- attached to a user
-router.get('/:user_id/students', async (req, res) => {
-    const user_id = req.params.user_id
+router.get('/:userID/students', async (req, res) => {
+    const userID = req.params.userID
     try{
-        const students = await users.findSchoolStudents(user_id)
+        const students = await users.findSchoolStudents(userID)
         if(students) {
             console.log(students)
             res.status(200).json({message: "Student Info", students})
