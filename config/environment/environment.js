@@ -1,14 +1,7 @@
 const express = require('express');
 const server = express();
 
-const knex = require('knex');
-
-const knexConfig = require('../../knexfile');
-
-const db = knex(knexConfig.development);
-
-
-//should return a list of all schools
+//should return the current env and mysql host
 server.get('/', (req, res) => {
 
   const DB_ENV = process.env.DB_ENV;
