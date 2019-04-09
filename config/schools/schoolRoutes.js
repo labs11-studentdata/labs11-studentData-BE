@@ -18,12 +18,12 @@ server.get('/', (req, res) => {
 });
 
 //should return a specific school
-server.get('/:id', (req, res) => {
+server.get('/:schoolID', (req, res) => {
   
-  const { id } = req.params;
+  const { schoolID } = req.params;
 
   db.select().from('schools')
-    .where({schoolID: id})
+    .where({schoolID: schoolID})
     .then(school => {
         if (school) {
             res.status(200).json(school);

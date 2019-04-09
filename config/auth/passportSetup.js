@@ -3,7 +3,8 @@ const GoogleStrategy = require("passport-google-oauth20");
 const users = require("./usersModel");
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  console.log(user)
+  done(null, user.userID);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -21,13 +22,14 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const currentUser = await users.findAuthId(profile.id);
+      console.log(profile)
     //   check if user is currently in db
       if (currentUser) {
         done(null, currentUser, { message: 'user in system' });
       } else {
         //   create new user if user is not in db
         const user = {
-          auth_id: profile.id,
+          authID: profile.id,
           first_name: profile.name.givenName,
           last_name: profile.name.familyName
         };
