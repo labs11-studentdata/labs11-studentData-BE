@@ -13,11 +13,11 @@ router.get('/', async (req,res) => {
 
     }
 })
-router.get('/:user_id', async (req, res) => {
-    const user_id = req.params.user_id;
+router.get('/:userID', async (req, res) => {
+    const userID = req.params.userID;
     const changes = req.body;
     try{
-        const user = await users.getUser(user_id);
+        const user = await users.getUser(userID);
         if(user) {
             res.status(200).json({message: "User Found", user});
         } else {
@@ -29,16 +29,23 @@ router.get('/:user_id', async (req, res) => {
     }
 })
 
-router.put('/:user_id', async (req, res) => {
-    const user_id = parseInt(req.params.user_id);
+router.put('/:userID', async (req, res) => {
+    const userID = parseInt(req.params.userID);
     const updates = req.body;
+    const newUpdates = {
+        ...updates,
+        userID: parseInt(updates.userID)
+    } 
+    console.log(newUpdates)
     console.log('_______________________')
     console.log(updates)
+    console.log(userID)
     console.log(updates)
     try{
-        const updatedUser = await users.updateUser(user_id, updates)
+        const updatedUser = await users.updateUser(userID, newUpdates)
         console.log(updatedUser)
-        res.status(200).json({message: "User updated", updatedUser})
+            res.status(200).json({message: "User updated", updatedUser})
+
     }
     catch(error){
         res.status(500).json({message: 'We are momentarily having issues!'});

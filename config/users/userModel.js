@@ -11,17 +11,17 @@ async function getUsers() {
     const users = await db('users');
     return users
 }
-async function getUser(id){
-    const user = await db('users').where({id}).first();
+async function getUser(userID){
+    const user = await db('users').where({userID}).first();
     return user
 } 
 
-async function updateUser(id, updates) {
-    const updatedUser = await db('users').update(updates).where({id : id});
-    console.log(id)
+async function updateUser(userID, updates) {
+    const updatedUser = await db('users').update(updates).where({userID});
+    console.log(userID)
     console.log(updates)
     console.log(updatedUser)
-    const user = await db('users').where({id: id}).first()
+    const user = await db('users').where({userID}).first()
     return user
 }
 
