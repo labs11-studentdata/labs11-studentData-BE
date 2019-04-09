@@ -4,7 +4,7 @@ module.exports = {generateToken};
 
 function generateToken(user){
     const payload = {
-        subject: user.user_id
+        subject: user.userID
     }
     const options = {
         expiresIn: '1d'
