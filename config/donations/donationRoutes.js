@@ -1,11 +1,7 @@
 const express = require('express');
 const server = express();
 
-const knex = require('knex');
-
-const knexConfig = require('../../knexfile');
-
-const db = knex(knexConfig.development);
+const db = require('../../data/dbConfig');
 
 //view all donations
 server.get('/', (req, res) => {
