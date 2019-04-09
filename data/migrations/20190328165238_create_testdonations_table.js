@@ -1,13 +1,34 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('donations', function(donations) {
-    donations.increments();
-    donations.integer('donationID');
-    donations.integer('user_ID');
-    donations.integer('student_id');
-    donations.integer('schoolID');
+
+    donations.increments('donationID');
+
+    donations
+      .integer('userID')
+      .unsigned()
+      .notNullable()
+
+    donations.foreign('userID').references('users.userID')
+
+    donations
+      .integer('studentID')
+      .unsigned()
+      .notNullable()
+
+    donations.foreign('studentID').references('students.studentID')
+
+
+    donations
+      .integer('schoolID')
+      .unsigned()
+      .notNullable()
+
+    donations.foreign('schoolID').references('schools.schoolID')
+
     donations.integer('donation_total');
-    donations.date('donation_date');
+    donations.timestamps(true, true);
+
   })
 };
 
