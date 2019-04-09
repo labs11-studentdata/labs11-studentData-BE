@@ -23,7 +23,7 @@ server.get('/:id', (req, res) => {
   const { id } = req.params;
 
   db.select().from('schools')
-    .where({id: id})
+    .where({schoolID: id})
     .then(school => {
         if (school) {
             res.status(200).json(school);
