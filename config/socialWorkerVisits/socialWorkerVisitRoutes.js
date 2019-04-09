@@ -4,11 +4,7 @@ const server = express();
     added some basic endpoints for the social_worker_visits table for testing purposes, 
     when we start adding the endpoints for the rest of the tables we can reorganize these all into separate files
 */
-const knex = require('knex');
-
-const knexConfig = require('../../knexfile');
-
-const db = knex(knexConfig.development);
+const db = require('../../data/dbConfig');
 
 //add a new visit
 server.post('/', (req, res) => {
