@@ -32,13 +32,20 @@ router.get('/:userID', async (req, res) => {
 router.put('/:userID', async (req, res) => {
     const userID = parseInt(req.params.userID);
     const updates = req.body;
+    const newUpdates = {
+        ...updates,
+        userID: userID
+    } 
+    console.log(newUpdates)
     console.log('_______________________')
     console.log(updates)
+    console.log(userID)
     console.log(updates)
     try{
-        const updatedUser = await users.updateUser(userID, updates)
+        const updatedUser = await users.updateUser(userID, newUpdates)
         console.log(updatedUser)
-        res.status(200).json({message: "User updated", updatedUser})
+            res.status(200).json({message: "User updated", updatedUser})
+
     }
     catch(error){
         res.status(500).json({message: 'We are momentarily having issues!'});
