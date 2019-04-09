@@ -60,6 +60,17 @@ server.get('/school/:id', async (req, res) => {
 
 })
 
+server.get('/school/nojoin/:schoolID', async (req, res) => {
+    const {schoolID} = req.params;
+    try {
+        const schoolVisits = await db('social_worker_visits').where('schoolId', schoolID);
+        res.status(200).json({schoolVisits: schoolVisits});
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({error: err, message: err.message});
+    }
+})
+
 
 
 //get list of all visits for a certain user
