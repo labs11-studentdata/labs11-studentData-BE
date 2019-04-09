@@ -17,7 +17,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   const token = jwt.generateToken(req.user);
   const user = req.user;
   console.log(user)
-  const query = querystring.stringify({token: token, user_id: user.userID, account_type: user.account_type, schoolID: user.schoolID });
+  const query = querystring.stringify({token: token, userID: user.userID, account_type: user.account_type, schoolID: user.schoolID });
   const created_at = user["created_at"]
   // const date = Date(createdAt)
   if(user.account_type === null) {
