@@ -7,8 +7,8 @@ async function addUser(user) {
     console.log(id)
     return db('users').where({id: id}).first()
 }
-function findAuthId(authId) {
-    return db('users').where({auth_id: authId}).first()
+function findAuthId(authID) {
+    return db('users').where({authID}).first()
 }
 function findUser(id) {
     return db('users').where({user_id: id}).first()
