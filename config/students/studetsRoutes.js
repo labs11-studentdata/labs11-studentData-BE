@@ -70,11 +70,11 @@ server.get('/school/:schoolID/students/', (req, res) => {
 })
 
 //get list of all students for a certain grade level at a certain school
-server.get('/school/:schoolID/students/:gradeID', (req, res) => {
-    const { schoolID, gradeID } = req.params;
+server.get('/school/:schoolID/students/:grade', (req, res) => {
+    const { schoolID, grade } = req.params;
 
     db.select().from('students')
-        .where({schoolID: schoolID}).andWhere({gradeID: gradeID})
+        .where({schoolID: schoolID}).andWhere({grade: grade})
             .then(students => {
                 res.status(200).json(students);
             })

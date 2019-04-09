@@ -25,7 +25,7 @@ server.get('/:id', (req, res) => {
     const { id } = req.params;
   
     db('social_worker_visits')
-    .where({visit_id: id})
+    .where({visitID: id})
     .then(visit => {
         if (visit) {
             res.status(200).json(visit);
@@ -60,6 +60,17 @@ server.get('/school/:id', async (req, res) => {
 
 })
 
+server.get('/school/nojoin/:schoolID', async (req, res) => {
+    const {schoolID} = req.params;
+    try {
+        const schoolVisits = await db('social_worker_visits').where('schoolId', schoolID);
+        res.status(200).json({schoolVisits: schoolVisits});
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({error: err, message: err.message});
+    }
+})
+
 
 
 //get list of all visits for a certain user
@@ -67,7 +78,7 @@ server.get('/user/:id', (req, res) => {
     const { id } = req.params;
 
     db.select().from('social_worker_visits')
-        .where({user_id: id})
+        .where({userID: id})
             .then(visits => {
                 res.status(200).json(visits);
             })
@@ -81,7 +92,7 @@ server.get('/user/:id', (req, res) => {
 server.delete('/:id', (req, res) => {
     const { id } = req.params;
 
-    db('social_worker_visits').where({ id })
+    db('social_worker_visits').where({visitID: id })
         .del()
         .then(visit => {
             if (visit) {
@@ -110,10 +121,10 @@ server.put('/:id', (req, res) => {
  })
 
 //  get the social worker visits for a particular admin 
- server.get('/:user_id', async (req, res) => {
-    const user_id = req.params.user_id; 
+ server.get('/:userID', async (req, res) => {
+    const userID = req.params.userID; 
     try{
-        const schoolID = await db('users').select('schoolID').where().first();
+        const schoolID = await db('users').select('schoolID').where({userID: userID}).first();
         console.log(schoolID)
         
     }
