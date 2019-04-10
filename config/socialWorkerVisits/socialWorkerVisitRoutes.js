@@ -8,7 +8,12 @@ const db = require('../../data/dbConfig');
 
 //add a new visit
 server.post('/', (req, res) => {
-    const visit = req.body;
+    const visit = {
+        visit_date: req.body.visit_date,
+        userID: req.body.userID,
+        schoolID: req.body.schoolID,
+        notes:req.body.notes
+    }
 
     db.insert(visit).into('social_worker_visits')
         .then(id => {
@@ -71,6 +76,17 @@ server.get('/school/nojoin/:schoolID', async (req, res) => {
     }
 })
 
+server.get('/user/nojoin/:userID', async (req, res) => {
+    const {userID} = req.params;
+    try {
+        const schoolVisits = await db('social_worker_visits').where('userID', userID);
+        res.status(200).json({schoolVisits: schoolVisits});
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({error: err, message: err.message});
+    }
+})
+
 
 
 //get list of all visits for a certain user
@@ -92,7 +108,7 @@ server.get('/user/:id', (req, res) => {
 server.delete('/:id', (req, res) => {
     const { id } = req.params;
 
-    db('social_worker_visits').where({visitID: id })
+    db('social_worker_visits').where({visitID, id })
         .del()
         .then(visit => {
             if (visit) {
