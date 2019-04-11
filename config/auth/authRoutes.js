@@ -19,6 +19,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   console.log(user)
   const query = querystring.stringify({token: token, user_id: user.userID, account_type: user.account_type, schoolID: user.schoolID });
   const created_at = user["created_at"]
+  console.log("888888888", query)
   // const date = Date(createdAt)
   if(user.account_type === null) {
     res.redirect(`${process.env.REACT_ROOT}/onboarding/${query}`);
