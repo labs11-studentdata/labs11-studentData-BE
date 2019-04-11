@@ -20,18 +20,23 @@ server.get('/user/:id', (req, res) => {
 
     const { id } = req.params;
 
-    db('donations')
-    .where({userID: id})
-    .then(donation => {
-        if (donation) {
-            res.status(200).json(donation);
-        } else {
-            res.status(404).json({ message: 'No donations by a board member with the specified ID exist.' })
-        }
-    })
-    .catch(err => {
-        res.status(500).json({ error: "Couldn't get the requested donations; please try again." });
-    })
+    db.select().from('donations')
+        //.join('users', 'donations.userID', '=', 'users.userID')
+        .join('students', 'donations.studentID', '=', 'students.studentID')
+        .join('schools', 'donations.schoolID', '=', 'schools.schoolID')
+
+
+        .where({userID: id})
+        .then(donation => {
+            if (donation) {
+                res.status(200).json(donation);
+            } else {
+                res.status(404).json({ message: 'No donations by a board member with the specified ID exist.' })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Couldn't get the requested donations; please try again." });
+        })
 });
 
 /* async function altDonations() {
@@ -120,5 +125,28 @@ server.get('/school/:id', async (req, res) => {
     catch(error){
         console.log(error)
     }
-})
+}) 
+
+/* server.get('/school/:id', (req, res) => {
+
+    const { id } = req.params;
+
+    db.select().from('donations').where({schoolID: id})
+
+        //.join('users', 'donations.userID', '=', 'users.userID')
+        .join('students', 'donations.studentID', '=', 'students.studentID')
+        .join('schools', 'donations.schoolID', '=', 'schools.schoolID')
+
+
+        //.where({schoolID: id})
+        //.join('users', 'donations.userID', '=', 'users.userID')
+        .then(donations => {
+            res.status(200).json(donations);
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Couldn't get the requested donations; please try again." });
+        })
+}) */
+
+
 module.exports = server
