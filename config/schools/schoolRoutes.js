@@ -43,8 +43,11 @@ server.post('/', (req, res) => {
   console.log(school)
   db('schools').insert(school)
     .then(id => {
-      res.status(201).json(id)
-      console.log(id)
+      db('schools').where({schoolID : id[0]})
+        .then(school => {
+          res.status(201).json(school)
+        })
+        .catch(err => res.status(500).json({err}))
     })
     .catch(err => {
       res.status(500).json(err);
