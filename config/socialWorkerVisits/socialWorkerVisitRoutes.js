@@ -88,12 +88,12 @@ server.get('/user/nojoin/:userID', async (req, res) => {
 })
 
 
-
 //get list of all visits for a certain user
 server.get('/user/:id', (req, res) => {
     const { id } = req.params;
 
     db.select().from('social_worker_visits')
+        .join('schools', 'social_worker_visits.schoolID', '=', 'schools.schoolID')
         .where({userID: id})
             .then(visits => {
                 res.status(200).json(visits);
