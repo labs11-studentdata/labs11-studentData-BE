@@ -30,7 +30,7 @@ server.get('/:id', (req, res) => {
     const { id } = req.params;
   
     db('social_worker_visits')
-    .where({visitID: id})
+    .where({visitID, id})
     .then(visit => {
         if (visit) {
             res.status(200).json(visit);
@@ -79,8 +79,8 @@ server.get('/school/nojoin/:schoolID', async (req, res) => {
 server.get('/user/nojoin/:userID', async (req, res) => {
     const {userID} = req.params;
     try {
-        const schoolVisits = await db('social_worker_visits').where('userID', userID);
-        res.status(200).json({schoolVisits: schoolVisits});
+        const userVisits = await db('social_worker_visits').where('userID', userID);
+        res.status(200).json({userVisits: userVisits});
     } catch(err) {
         console.log(err);
         res.status(500).json({error: err, message: err.message});
@@ -94,6 +94,7 @@ server.get('/user/:id', (req, res) => {
     const { id } = req.params;
 
     db.select().from('social_worker_visits')
+        .join('schools', 'social_worker_visits.schoolID', '=', 'schools.schoolID')
         .where({userID: id})
             .then(visits => {
                 res.status(200).json(visits);
@@ -108,7 +109,7 @@ server.get('/user/:id', (req, res) => {
 server.delete('/:id', (req, res) => {
     const { id } = req.params;
 
-    db('social_worker_visits').where({visitID, id })
+    db('social_worker_visits').where({visitID: id })
         .del()
         .then(visit => {
             if (visit) {
@@ -125,9 +126,12 @@ server.delete('/:id', (req, res) => {
 //update a visit
 server.put('/:id', (req, res) => {
 
-    const visit = req.body;
+    const { id } = req.params;
+    const changes = req.body;
  
-    db('social_worker_visits').update(visit).where({visitID: visit.visitID})
+    db('social_worker_visits')
+    .where({visitID: id})
+    .update(changes)
      .then(updated => {
        res.status(201).json(updated);
      })
