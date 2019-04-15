@@ -114,7 +114,7 @@ server.get('/school/:id', async (req, res) => {
             's.last_name as student_last',
             's.dues',
             'd.donation_total',
-            'd.donation_date',
+            'd.created_at',
             'd.schoolID'
             ).from('donations AS d').innerJoin('students AS s', 'd.studentID', 's.studentID').innerJoin('users AS u', "d.userID", "u.userID").where('d.schoolID', '=', id)
         const users = await db('users') 

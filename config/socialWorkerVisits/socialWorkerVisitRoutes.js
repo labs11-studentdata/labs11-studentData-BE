@@ -54,7 +54,7 @@ server.get('/school/:id', async (req, res) => {
             'v.visit_date',
             'u.first_name',
             'u.last_name'
-        ).from('social_worker_visits AS v').innerJoin('users AS u', 'u.id', 'v.user_id').where('v.schoolID', '=', id)
+        ).from('social_worker_visits AS v').innerJoin('users AS u', 'u.userID', 'v.userID').where('v.schoolID', '=', id)
         res.status(200).json({schoolVisits: schoolVisits})
     }
     catch(error) {
