@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/');
     },
     filename: function(req, file, cb) {
-        cb(null, file.originalname);
+        cb(null, new Date().toISOString() + file.originalname);
     }
 });
 
@@ -32,7 +32,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 5
+        fileSize: 1024 * 1024 * 2
     },
     fileFilter: fileFilter 
 })
@@ -46,7 +46,7 @@ server.post("/", upload.single('userImage'), (req, res, next) => {
         })
     } else {
         console.log("received file", req.file.path);
-        res.status(200).json(req.file.originalname);
+        res.status(200).json(req.file.filename);
     }
 
 });
