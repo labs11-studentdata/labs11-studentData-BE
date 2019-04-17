@@ -30,7 +30,8 @@ server.get('/:id', (req, res) => {
     const { id } = req.params;
   
     db('social_worker_visits')
-    .where({visitID, id})
+    .join('schools', 'social_worker_visits.schoolID', '=', 'schools.schoolID')
+    .where({visitID: id})
     .then(visit => {
         if (visit) {
             res.status(200).json(visit);
